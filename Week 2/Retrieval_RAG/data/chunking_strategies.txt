@@ -1,0 +1,15 @@
+Chunking Strategies in RAG
+
+Chunking is the process of splitting a large document into smaller pieces before embedding and storing them. The chunk is the unit of retrieval — whatever you chunk becomes the smallest retrievable piece of information.
+
+Fixed chunking splits text every N characters or tokens regardless of content. It is simple and predictable but often splits sentences or paragraphs mid-thought, which hurts both embedding quality and answer readability. Fixed chunking works acceptably for highly structured content like tables or code but is generally the worst choice for prose.
+
+Recursive chunking is the standard approach for prose documents. It tries to split on natural boundaries in order: paragraphs first (double newline), then single newlines, then sentences, then words, and only then individual characters as a last resort. This preserves semantic units as much as possible. LangChain's RecursiveCharacterTextSplitter implements this pattern and is the default recommendation for most use cases.
+
+Chunk overlap is a technique where the last M characters of one chunk are repeated at the start of the next chunk. This prevents information loss at boundaries — without overlap, a sentence that spans a chunk boundary would be split across two chunks, making neither retrievable for queries about that sentence. Typical overlap is 10-15% of chunk size.
+
+Chunk size affects retrieval precision and context richness. Small chunks (128-256 tokens) are precise — they match narrow queries well — but may lack surrounding context, making the LLM's answer incomplete. Large chunks (1024+ tokens) provide rich context but match queries less precisely and consume more tokens per retrieval. The standard starting point is 512 tokens with 50-100 token overlap.
+
+Semantic chunking is an advanced technique that splits on embedding similarity rather than character boundaries. It embeds every sentence, then splits where the cosine similarity between adjacent sentences drops below a threshold — indicating a topic change. This produces more coherent chunks but is slower to index and overkill for most production systems.
+
+The right chunk size depends on your documents and queries. Short factual queries need small precise chunks. Long analytical queries need larger context-rich chunks. The only way to know is to evaluate retrieval quality empirically on real queries from your use case.

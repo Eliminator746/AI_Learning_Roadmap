@@ -1,0 +1,7 @@
+Day 1:  loader.py + chunker.py
+Day 2:  embedder.py + vectorstore.py
+Day 3:  bm25_store.py + retriever.py (strategies A, B, C)
+Day 4:  reranker.py (strategy D) — see rank shift from reranking
+Day 5:  enricher.py (strategy G partial)
+Day 6:  query_transformer.py (strategies E, F)
+Day 7:  generator.py + full comparison report across all 7 strategies

@@ -1,0 +1,13 @@
+What is RAG (Retrieval Augmented Generation)
+
+RAG is a technique that improves LLM responses by injecting relevant external knowledge into the prompt at query time. Instead of relying solely on what the model learned during training, RAG retrieves up-to-date or domain-specific information and gives it to the model as context.
+
+The core problem RAG solves is called "knowledge cutoff" — LLMs are trained on data up to a certain date and cannot know things that happened after that. RAG fixes this by connecting the model to a live or private knowledge source.
+
+RAG has two distinct phases. The indexing phase happens once offline: documents are chunked, embedded into vectors, and stored in a vector database. The retrieval phase happens at query time: the user's question is embedded, similar chunks are fetched from the vector DB, and those chunks are injected into the prompt before the LLM generates an answer.
+
+Why not just put the entire document in the prompt? For small documents, you can. But for large corpora — thousands of internal documents, a 500-page manual, or a codebase — stuffing everything into context is impossible due to token limits, and expensive even when it fits. RAG solves both problems by retrieving only the relevant subset.
+
+The quality of a RAG system depends more on retrieval quality than on the LLM itself. A weak retriever feeding irrelevant chunks to a strong model produces bad answers. This is why techniques like hybrid search, reranking, and query transformation exist — they all target retrieval quality, not generation quality.
+
+Common failure modes in RAG include: chunks that are too large (dilutes relevance), chunks that are too small (loses context), poor overlap between chunks (splits sentences mid-thought), and no metadata filtering (retrieves from wrong documents).

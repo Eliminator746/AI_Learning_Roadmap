@@ -1,0 +1,22 @@
+What is supervised learning?
+Supervised learning is a machine learning technique that uses labeled data sets to train artificial intelligence (AI) models to identify the underlying patterns and relationships. The goal of the learning process is to create a model that can predict correct outputs on new real-world data.
+
+Labeled data sets consist of sample data points along with the correct outputs or answers. As input data is fed into the machine learning algorithm, it adjusts its parameters until the model has been fitted appropriately. Labeled training data provides a “ground truth,” explicitly teaching the model to identify the relationships between features and data labels.
+
+Supervised machine learning helps organizations solve various real-world problems at scale, such as classifying spam or predicting stock prices. It can be used to build highly accurate machine learning models.
+
+What is ground truth data?
+Ground truth data is verified against real-world outcomes, often through human annotation or measurement, and is used to train, validate and test models. As the name implies, ground truth data has been confirmed to be true—it is reflective of real-world values and outcomes. Ground truth reflects the ideal outputs for any given input data.
+
+Supervised learning relies on ground truth data to teach a model the relationships between inputs and outputs. The labeled datasets used in supervised learning are ground truth data. Trained models apply their understanding of the that data to make predictions based on new, unseen data.
+
+Types of supervised learning
+Classification
+Classification in machine learning uses an algorithm to sort data into categories. It recognizes specific entities within the dataset and attempts to determine how those entities should be labeled or defined. Common classification algorithms are linear classifiers, support vector machines (SVM), decision trees, k-nearest neighbor (KNN),  logistic regression and random forest.
+
+Neural networks excel at handling complex classification problems. A neural network is a deep learning architecture that processes training data with layers of nodes that mimic the human brain. Each node is made up of inputs, weights, a bias (or threshold) and an output. If an output value exceeds a preset threshold, the node “fires” or activates, passing data to the next layer in the network. 
+
+Regression
+Regression is used to understand the relationship between dependent and independent variables. In regression problems, the output is a continuous value, and models attempt to predict the target output. Regression tasks include projections for sales revenue or financial planning.
+
+Regression algorithms include  linear regression, lasso regression, ridge regression and polynomial regression are three examples of regression algorithms.
