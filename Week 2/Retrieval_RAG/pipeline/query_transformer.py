@@ -34,20 +34,25 @@ Three techniques, each solving a different failure mode:
     Best for: narrow technical questions buried inside larger concepts.
 """
 
-import os
+import os,sys
 from openai import OpenAI
-from dotenv import load_dotenv
+from pathlib import Path
+from dotenv import load_dotenv, find_dotenv
 
-load_dotenv()
+
+
+# DELETE all of this — fragile, breaks if you move files
+load_dotenv(find_dotenv())
+print("KEY:", repr(os.getenv("OPENAI_API_KEY")))
+
 
 # Point at whichever free endpoint you're using
 # Change base_url + api_key + MODEL to switch providers — nothing else changes
 _client = OpenAI(
-    base_url=os.getenv("OPENAI_BASE_URL", "https://openrouter.ai/api/v1"),
-    api_key=os.getenv("OPENROUTER_API_KEY") or os.getenv("OPENAI_API_KEY"),
+    api_key=os.getenv("OPENAI_API_KEY"),
 )
-MODEL = os.getenv("LLM_MODEL", "openrouter/free")
 
+MODEL = "gpt-5"
 
 def _llm_call(prompt: str, max_tokens: int = 300) -> str:
     """Single LLM call — used by all three transformers."""

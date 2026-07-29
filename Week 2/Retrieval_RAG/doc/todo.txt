@@ -5,3 +5,16 @@ Day 4:  reranker.py (strategy D) — see rank shift from reranking
 Day 5:  enricher.py (strategy G partial)
 Day 6:  query_transformer.py (strategies E, F)
 Day 7:  generator.py + full comparison report across all 7 strategies
+
+
+enricher.py -> Contextual Retrieval -> useful for static knowledge bases. Not worth it for frequently updated docs.
+What your code does:
+
+It takes one chunk and the full document.
+It asks the model to generate a short context summary for that chunk.
+That summary is prepended to the chunk text before embedding.
+So the chunk becomes:
+
+summary + original chunk text
+
+--------------------------------------------------------------------------------
