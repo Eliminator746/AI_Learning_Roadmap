@@ -49,6 +49,7 @@ from langchain_chroma import Chroma
 
 embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 
+# Chroma db created. Now we need to fill this db using add_documents
 vector_store = Chroma(
     embedding_function=embeddings,
     persist_directory='my_chroma_db',
@@ -134,13 +135,21 @@ prompt = ChatPromptTemplate.from_template(
 
 question          = "What this video talk about?"
 retrieved_docs    = retriever.invoke(question)
-# print(retrieved_docs) # List of docs
+# print(retrieved_docs) # List of Document objects
 
 context_text = "\n\n".join(doc.page_content for doc in retrieved_docs)
 final_prompt = prompt.invoke({"context": context_text, "question": question})
 
+# final_prompt = retrieved content + system prompt + question , where retrieved content = list[docs] converted to str
 answer = model.invoke(final_prompt)
 print("\nAnswer:", answer.text)  # FIX: was answer.content
+
+
+# Document(
+#         page_content="The video discusses ...",
+#         metadata={...}
+#     ),
+
 
 
 # We are manually calling fn eveytime i.e we are invoking mulitiple times, so to automate we can build chain. WIth single invoke, all steps will be done

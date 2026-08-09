@@ -3,9 +3,9 @@
 
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.agents import create_agent
-from langchain.tools import tool
 from langgraph.checkpoint.memory import InMemorySaver
 from fastapi import FastAPI
+from pydantic import BaseModel
 from dotenv import load_dotenv
 from pathlib import Path
 
@@ -22,24 +22,44 @@ model = ChatGoogleGenerativeAI(
 
 app = FastAPI()
 
+# Instantiated ONCE, at module load time -- see explanation below.
 agent = create_agent(
     model=model,
     tools=[],
-    checkpointer=InMemorySaver()
+    checkpointer=InMemorySaver(),
 )
 
 
-
-
-
-@app.post("/chat")
-async def chat(query:str, session_id:str):
+# @app.post("/chat")
+# async def chat(query:str, session_id:str):
     
-    thread_config = {"configurable": {"thread_id": session_id}}
-    res = agent.ainvoke(
-        {"messages": {"role": "user", "content": query}},
+#     thread_config = {"configurable": {"thread_id": session_id}}
+#     res = agent.ainvoke(
+#         {"messages": {"role": "user", "content": query}},
+#         thread_config,
+#     )
+    
+#     print(res)
+#     return {"response": res}
+
+
+
+class ChatRequest(BaseModel):
+    message: str
+    session_id: str
+
+
+class ChatResponse(BaseModel):
+    response: str
+
+
+@app.post("/chat", response_model=ChatResponse)
+async def chat(request: ChatRequest):
+    thread_config = {"configurable": {"thread_id": request.session_id}}
+
+    res = await agent.ainvoke(
+        {"messages": [{"role": "user", "content": request.message}]},
         thread_config,
     )
-    
-    print(res)
-    return {"response": res}
+
+    return ChatResponse(response=res["messages"][-1].text)

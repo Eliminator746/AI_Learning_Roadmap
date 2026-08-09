@@ -1,0 +1,10 @@
+Your Conversation Log:
+You: Hi my name is Mahato. I live in Sweden. Do you know the capital of Sweden?
+AI: Hi Mahato! Nice to meet you. 
+
+Yes, I do! The capital of Sweden is **Stockholm**.
+You: Tell me about recent Jharkhand protest that is going on, you can pull the info from website. tell me in 2 sentences only
+AI: Recent major protests in Jharkhand have involved thousands of students demonstrating against paper leaks in the JSSC-CGL government recruitment examination, demanding transparency and fair hiring practices. Additionally, regional groups continue agitating across the state for a local employment policy based on 1932 land records (Khatian) and Scheduled Tribe status for the Kudmi community.
+You: what's my name
+AI: Your name is Mahato!
+End of Conversation
